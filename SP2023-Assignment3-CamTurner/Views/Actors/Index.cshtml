@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SP2023_Assignment3_CamTurner.Models.Actors>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Actor Catalog</h1>
+
+<p>
+    <a asp-action="Create">Add an Actor!</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                IMDB Url
+            </th>
+            <th>
+                Photo
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Movie)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMDBUrl)
+            </td>
+            <td>
+                @if (item.ActorPhoto != null)
+                {
+                    <img width="100" height="148" src="@Url.Action("GetActorPhoto", "Actors", new {item.Id})" />
+                }
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Movie.Id)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
